@@ -1,3 +1,7 @@
 train1<-read_csv('train1.csv')
 train2<-read_csv('train2.csv')
 test<-read_csv('test_orig.csv')
+
+predictions <- predict(xgb_model, data.matrix(test[,feature.names]))
+submission  <- data.frame(USER_ID=submission$USER_ID,SCORE=round(predictions,digits = 6))
+write_csv(submission, "mod_17f_220.csv")
